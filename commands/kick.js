@@ -1,0 +1,82 @@
+const { SlashCommandBuilder, PermissionFlagsBits, EmbedBuilder } = require('discord.js');
+
+module.exports = {
+	data: new SlashCommandBuilder()
+		.setName('kick')
+		.setDescription('Select a member and kicks them.')
+		.addUserOption(option =>
+			option
+				.setName('target')
+				.setDescription('The member to kick')
+				.setRequired(true))
+		.addStringOption(option =>
+			option
+				.setName('reason')
+				.setDescription('The reason for kicking'))
+		.setDefaultMemberPermissions(PermissionFlagsBits.KickMembers)
+		.setDMPermission(false),
+	async execute(interaction) {
+		const { options, guild, member} = interaction;
+		const target = interaction.options.getUser('target');
+		const reason = interaction.options.getString('reason') ?? 'No reason provided';
+		const errorsArray = [];
+
+		const errorsEmbed = new EmbedBuilder()
+			.setAuthor({ name: 'Could not kick user', iconURL: guild.iconURL() })
+			.setColor('Red');
+		
+		const SuccessEmbed = new EmbedBuilder()
+			.setAuthor({ name: 'User kicked', iconURL: guild.iconURL() })
+			.setColor('Gold')
+			.setDescription(
+				`***${target.tag}***  has been kicked for ***${reason}***`
+			);
+
+			if(!target.manageable || !target.moderatable)
+            errorsArray.push('The selected user is not moderatable');
+
+            if(errorsArray.length)
+            return interaction.reply({
+                embeds: [errorsEmbed.setDescription(errorsArray.join("\n"))],
+                ephemeral: true
+            });
+
+			interaction.guild.members.kick(target).catch(err =>{
+				interaction.reply({ embeds: [errorsEmbed] })
+				return console.log('Error puñetas en kick.js lptm', err)
+			});
+
+			return interaction.reply({ embeds: [SuccessEmbed]});
+
+		/*if(await interaction.guild.members.kick(target)){
+			await interaction.reply(`***${target.tag}*** has been kicked for ***${reason}***`);
+		} else {
+			await interaction.reply(`${target.tag} couldn't be kicked.\nPlease check both my and your permissions`);
+		}*/
+	},
+};
+
+
+
+/**
+ *  target.timeout(ms(duration), reason).catch(err => {
+                interaction.reply({
+                    embeds: [errorsEmbed.setDescription('Could not timeout the user to an uncommon error')]
+                })
+                return console.log('Error puñetas en timeout.js lptm', err);
+            });
+ * 
+ * 
+ * 
+ * const successEmbed = new EmbedBuilder()
+                .setAuthor({ name: 'Warn issued', iconURL: guild.iconURL() })
+                .setColor('Gold')
+                .setDescription([
+                    `***${target}*** was issued a warn by ***${member}***`,
+                    `bringing their total infractions to ***${userData.Infractions.length}***`,
+                    `\nReason: ${reason}`
+                ].join('\n'));
+
+                return interaction.reply({ embeds: [successEmbed] });
+ * 
+*/
