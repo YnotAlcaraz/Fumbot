@@ -43,7 +43,7 @@ module.exports = {
 
 			interaction.guild.members.kick(target).catch(err =>{
 				interaction.reply({ embeds: [errorsEmbed] })
-				return console.log('Error puñetas en kick.js lptm', err)
+				return console.log('Error en kick.js', err)
 			});
 
 			return interaction.reply({ embeds: [SuccessEmbed]});
