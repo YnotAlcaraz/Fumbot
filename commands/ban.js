@@ -43,15 +43,10 @@ module.exports = {
 
 			interaction.guild.members.ban(target).catch(err =>{
 				interaction.reply({ embeds: [errorsEmbed] })
-				return console.log('Error puñetas en ban.js lptm', err)
+				return console.log('Error en ban.js', err)
 			});
 
 			return interaction.reply({ embeds: [SuccessEmbed]});
 
-		/*if(await interaction.guild.members.kick(target)){
-			await interaction.reply(`***${target.tag}*** has been kicked for ***${reason}***`);
-		} else {
-			await interaction.reply(`${target.tag} couldn't be kicked.\nPlease check both my and your permissions`);
-		}*/
 	},
 };
