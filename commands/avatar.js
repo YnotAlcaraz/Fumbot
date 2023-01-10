@@ -7,9 +7,7 @@ module.exports = {
 		.addUserOption(option => option.setName('target').setDescription('The user\'s avatar to show')),
 	async execute(interaction) {
 		const user = interaction.options.getUser('target');
-		/*if (user) return interaction.reply(`:warnming: [PROPER EMBED IS PENDING] :warning: \n${user.username}'s avatar: ${user.displayAvatarURL()}`);
-		return interaction.reply(` :warning: [PROPER EMBED IS PENDING] :warning: \nYour avatar: ${interaction.user.displayAvatarURL()}`);
-		*/
+
 		if(user){
 			const embed = new EmbedBuilder()
 			.setColor(0x18e1ee)
