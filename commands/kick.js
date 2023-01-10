@@ -55,28 +55,3 @@ module.exports = {
 		}*/
 	},
 };
-
-
-
-/**
- *  target.timeout(ms(duration), reason).catch(err => {
-                interaction.reply({
-                    embeds: [errorsEmbed.setDescription('Could not timeout the user to an uncommon error')]
-                })
-                return console.log('Error puñetas en timeout.js lptm', err);
-            });
- * 
- * 
- * 
- * const successEmbed = new EmbedBuilder()
-                .setAuthor({ name: 'Warn issued', iconURL: guild.iconURL() })
-                .setColor('Gold')
-                .setDescription([
-                    `***${target}*** was issued a warn by ***${member}***`,
-                    `bringing their total infractions to ***${userData.Infractions.length}***`,
-                    `\nReason: ${reason}`
-                ].join('\n'));
-
-                return interaction.reply({ embeds: [successEmbed] });
- * 
-*/
