@@ -40,11 +40,3 @@ connect(databaseURL,{
 
 
 client.login(token);
-
-
-
-//node deploy-commands.js
-//node index.js
-
-//https://discordjs.guide/creating-your-bot/event-handling.html#individual-event-files
-//joARuH1LpW5ND4Bc
